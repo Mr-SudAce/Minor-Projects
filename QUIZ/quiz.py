@@ -1,60 +1,11 @@
-QUIZ = [
-    {
-        'question': "Which planet is known as the Red Planet?",
-        'answer': "Mars",
-        'options': ["Earth", "Mars", "Jupiter", "Mercury"]
-    },
-    {
-        'question': "What is the capital city of Japan?",
-        'answer': "Tokyo",
-        'options': ["Seoul", "Tokyo", "Beijing", "Bangkok"]
-    },
-    {
-        'question': "Who wrote the play 'Romeo and Juliet'?",
-        'answer': "William Shakespeare",
-        'options': ["William Shakespeare", "Jane Austen", "Mark Twain", "Charles Dickens"]
-    },
-    {
-        'question': "What is the powerhouse of the cell?",
-        'answer': "Mitochondria",
-        'options': ["Nucleus", "Mitochondria", "Ribosome", "Golgi apparatus"]
-    },
-    {
-        'question': "Which element has the chemical symbol 'O'?",
-        'answer': "Oxygen",
-        'options': ["Gold", "Oxygen", "Osmium", "Oganesson"]
-    },
-    {
-        'question': "In which year did the Titanic sink?",
-        'answer': "1912",
-        'options': ["1905", "1912", "1920", "1898"]
-    },
-    {
-        'question': "What is the largest ocean on Earth?",
-        'answer': "Pacific Ocean",
-        'options': ["Atlantic Ocean", "Indian Ocean", "Pacific Ocean", "Arctic Ocean"]
-    },
-    {
-        'question': "Who painted the Mona Lisa?",
-        'answer': "Leonardo da Vinci",
-        'options': ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"]
-    },
-    {
-        'question': "What is the freezing point of water in Celsius?",
-        'answer': "0",
-        'options': ["-32", "0", "100", "32"]
-    },
-    {
-        'question': "Which country gifted the Statue of Liberty to the USA?",
-        'answer': "France",
-        'options': ["United Kingdom", "Germany", "France", "Italy"]
-    }
-]
+from quizQ import quizQ
+import random
 
-
-
-def quiz(questions):
+def quiz(questions, num_questions=None):
     score = 0
+    random.shuffle(questions)
+    if num_questions:
+        questions = questions[:num_questions]
     for q_quest in questions:
         print(f"\n{q_quest['question']}")
         for i , option in enumerate(q_quest['options']):
@@ -79,4 +30,4 @@ def quiz(questions):
     print(f"Game Finished !! You Got {score} out of {len(questions)} question correct")
     
 
-quiz(QUIZ)
+quiz(quizQ, num_questions=10)
