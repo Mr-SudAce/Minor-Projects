@@ -22,7 +22,7 @@ def load_users():
 def save_atmdetail(atm):
     with open(data_file, "w") as file:
         for user in atm:
-            file.write(f"{user['pin']} | {user['name']} | {user['accnumber']} | {user['balance']}\n")
+            file.write(f"{user['pin']} | {user['name']} | {user['accnumber']} | {user['blnc']}\n")
 
 
 def create_account(atm):
@@ -35,7 +35,7 @@ def create_account(atm):
         "pin": pin,
         "name": name,
         "accnumber": acc_number,
-        "balance": balance
+        "blnc": balance
     })
     
     save_atmdetail(atm)
@@ -69,7 +69,7 @@ def ATM():
             pin = input("Enter your PIN: ")
             user = find_user(atm, pin)
             if user:
-                print(f"Hello {user['name']}! Your current balance is Rs.{user['balance']}")
+                print(f"Hello {user['name']}! Your current balance is Rs.{user.get('blnc', '0')}")
             else:
                 print("Invalid PIN!")
         elif choice == "3":
@@ -77,10 +77,10 @@ def ATM():
             user = find_user(atm, pin)
             if user:
                 amount = float(input("Enter amount to withdraw: "))
-                if amount <= user['balance']:
-                    user['balance'] -= amount
+                if amount <= user['blnc']:
+                    user['blnc'] -= amount
                     save_atmdetail(atm)
-                    print(f"Withdrawal successful! New balance: Rs.{user['balance']}")
+                    print(f"Withdrawal successful! New balance: Rs.{user['blnc']}")
                 else:
                     print("Insufficient balance!")
             else:
