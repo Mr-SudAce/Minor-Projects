@@ -18,12 +18,12 @@ screen_height = window.winfo_screenheight()  # Get the height of the screen
 window.geometry(f"700x200+{(screen_width // 2) - 400}+{(screen_height // 2) - 300}")
 
 
-window.configure(bg="#6f6f6f")  # Set the window background color to red
+window.configure(bg="#6f6f6f")                                # Set the window background color to red
 
 
-label = tk.Label(text="Enter to Speak", fg="#000000")  # Label
-entry = tk.Entry(window, width=30)  # Input Box
-button = tk.Button(text="Submit", command=on_submit)  # Button
+label = tk.Label(text="Enter to Speak", fg="#000000")         # Label
+entry = tk.Entry(window, width=30)                              # Input Box
+button = tk.Button(text="Submit", command=on_submit)            # Button
 
 
 # Using Grid for all widgets
