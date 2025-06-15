@@ -1,40 +1,45 @@
-import tkinter as tk  # Import the tkinter library for GUI
-from texttospeech import *
-
+import tkinter as tk
+from texttospeech import *  # Assuming you have a function called entrytospeak()
 
 def on_submit():
-    userInput = entry.get()
-    entrytospeak(userInput)
+    user_input = entry.get()
+    entrytospeak(user_input)
 
+# === Main Window ===
+window = tk.Tk()
+window.title("🗣️ Speak It Out")
+window_width, window_height = 700, 200
+screen_width = window.winfo_screenwidth()
+screen_height = window.winfo_screenheight()
+x = (screen_width // 2) - (window_width // 2)
+y = (screen_height // 2) - (window_height // 2)
+window.geometry(f"{window_width}x{window_height}+{x}+{y}")
+window.configure(bg="#1f1f1f")
 
-window = tk.Tk()  # Create the main window
+# === Fonts ===
+LABEL_FONT = ("Segoe UI", 14)
+ENTRY_FONT = ("Segoe UI", 14)
+BUTTON_FONT = ("Segoe UI", 12, "bold")
 
+# === Label ===
+label = tk.Label(window, text="🎤 Enter text to speak:", font=LABEL_FONT, fg="#ffffff", bg="#1f1f1f")
+label.pack(pady=(30, 10))
 
-screen_width = window.winfo_screenwidth()  # Get the width of the screen
-screen_height = window.winfo_screenheight()  # Get the height of the screen
+# === Entry ===
+entry = tk.Entry(window, font=ENTRY_FONT, width=50, bd=2, relief="groove", bg="#f0f0f0", fg="#000")
+entry.pack(pady=5, ipady=5)
 
+# === Submit Button ===
+def on_hover(e): submit_btn.config(bg="#27ae60", fg="#fff")
+def on_leave(e): submit_btn.config(bg="#2ecc71", fg="#fff")
 
-# Set the window size to 700x500 and position it near the center of the screen
-window.geometry(f"700x200+{(screen_width // 2) - 400}+{(screen_height // 2) - 300}")
+submit_btn = tk.Button(window, text="🔊 Speak", font=BUTTON_FONT, bg="#2ecc71", fg="#fff",
+                       activebackground="#1abc9c", activeforeground="#ffffff", command=on_submit,
+                       relief="ridge", bd=3, padx=20, pady=5, cursor="hand2")
+submit_btn.pack(pady=(20, 10))
 
+submit_btn.bind("<Enter>", on_hover)
+submit_btn.bind("<Leave>", on_leave)
 
-window.configure(bg="#6f6f6f")                                # Set the window background color to red
-
-
-label = tk.Label(text="Enter to Speak", fg="#000000")         # Label
-entry = tk.Entry(window, width=30)                              # Input Box
-button = tk.Button(text="Submit", command=on_submit)            # Button
-
-
-# Using Grid for all widgets
-label.grid(row=0, column=0, padx=20, pady=(30, 10), sticky="ew")
-entry.grid(row=0, column=1, padx=20, pady=(30, 10), sticky="ew")
-button.grid(row=0, column=2, padx=20, pady=(30, 10), sticky="ew")
-
-
-window.columnconfigure(0, weight=1)
-window.columnconfigure(1, weight=3)
-window.columnconfigure(2, weight=1)
-
-
-window.mainloop()  # Start the GUI event
+# === Mainloop ===
+window.mainloop()
